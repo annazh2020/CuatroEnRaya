@@ -5,6 +5,8 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
+import javax.naming.OperationNotSupportedException;
+
 import org.junit.Test;
 
 public class JugadorTest {
@@ -23,7 +25,7 @@ public class JugadorTest {
 	private static final String ERROR_FICHA_NULA = "ERROR: El color de las fichas no puede ser nulo.";
 
 	@Test
-	public void constructorNombreValidoFichaValidaCreaJugadorCorrectamente() {
+	public void constructorNombreValidoFichaValidaCreaJugadorCorrectamente()  {
 		Jugador jugador = new Jugador("José Ramón", Ficha.AZUL);
 		assertThat(NOMBRE_NO_ESPERADO, jugador.getNombre(), is("José Ramón"));
 		assertThat(FICHA_NO_ESPERADA, jugador.getColorFichas(), is(Ficha.AZUL));
@@ -51,7 +53,7 @@ public class JugadorTest {
 			fail(NO_EXCEPCION);
 		}
 		try {
-			jugador = new Jugador("   ", Ficha.AZUL);
+			jugador = new Jugador("        ", Ficha.AZUL);
 			fail(EXCEPCION_NOMBRE_VACIO);
 		} catch (IllegalArgumentException e) {
 			assertThat(MENSAJE_EXCEPCION_NO_ESPERADO, e.getMessage(), is(ERROR_NOMBRE_VACIO));
