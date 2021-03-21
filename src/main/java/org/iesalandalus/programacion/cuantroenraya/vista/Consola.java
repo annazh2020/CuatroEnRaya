@@ -22,10 +22,10 @@ public class Consola {
 	public static Ficha elegirColorFichas() {
 		int eleccion;
 		do {
-		System.out.println("Elige el color de tus fichas (0-AZUL, 1-VERDE");
+		System.out.println("Elige el color de tus fichas (0-AZUL, 1-VERDE):");
 		eleccion=Entrada.entero();
 		
-		}while (eleccion!=0 || eleccion!=1);
+		}while (eleccion!=0 && eleccion!=1);
 		
 		if (eleccion==0) {
 			return Ficha.AZUL;
@@ -53,7 +53,7 @@ public class Consola {
 		do {
 		System.out.println(jugador.getNombre()+",introduce la columna en la que deseas introducir la ficha (0-6):");;
 			columna=Entrada.entero();
-		} while (columna<0 ||columna>=Tablero.COLUMNAS);
+		} while (columna<0 || columna>=Tablero.COLUMNAS);
 		return columna;
 	}
 	

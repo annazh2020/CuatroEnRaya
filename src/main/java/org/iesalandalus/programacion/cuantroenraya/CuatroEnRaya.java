@@ -30,18 +30,34 @@ public class CuatroEnRaya {
 		int columna;
 		boolean finalizar =false;
 		
-		do { 
+		//do { 
 			columna=Consola.leerColumna(jugador);
 			finalizar=tablero.introducirFicha(columna, jugador.getColorFichas());
-		} while (!finalizar);
+		//} while (!finalizar);
 		
-		return true;
+		return finalizar;
 	}
 	
-	public void jugar() {
-		 
+	public void jugar() throws OperationNotSupportedException {
+		 boolean ganador1=false;
+		 boolean ganador2=false;
+		 while (!tablero.estaLleno() && (!ganador1 && !ganador2)) {
+			if (!ganador2) {
+				ganador1=tirar(jugadores[0]);
+				System.out.println(tablero.toString());
+			}
+			if (!ganador1) {
+				ganador2=tirar(jugadores[1]);
+				System.out.println(tablero.toString());
+			}
+			
+		 }
+		 if (ganador1) {
+			 System.out.println("ENHORABUENA, " +jugadores[0].getNombre()+ " has ganado!!!");
+		 }else if (ganador2) {
+			 System.out.println("ENHORABUENA, " +jugadores[1].getNombre()+ " has ganado!!!"); 
+		 }
 		
-		//System.out.println("ENHORABUENA" +jugadores.toString()+ " has ganado!");
 	}
 		
 		
