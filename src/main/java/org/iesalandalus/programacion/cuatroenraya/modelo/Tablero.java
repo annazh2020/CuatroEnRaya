@@ -12,8 +12,6 @@ public class Tablero {
 
 	public Tablero() {
 		casillas = new Casilla[FILAS][COLUMNAS];
-
-		// Inicializamos el tablero con las casillas (con las fichas a null)
 		for (int i = 0; i < FILAS; i++) {
 			for (int j = 0; j < COLUMNAS; j++) {
 				casillas[i][j] = new Casilla();
@@ -22,13 +20,10 @@ public class Tablero {
 	}
 
 
-	//la columna está vacía cuando la última casilla (la de abajo) de esta columna está vacía
-
 	private boolean columnaVacia(int columna) {
 		return !casillas[0][columna].estaOcupada();
 	}
 
-	//el tablero está vacío cuando todas las columnas están vacías.
 
 	public boolean estaVacio() {
 
@@ -40,10 +35,6 @@ public class Tablero {
 		return true;
 	}
 
-
-
-
-	// Una columna está llena cuando la última ficha (de la última fila la de arriba) está ocupada.
 
 	private boolean columnaLlena(int columna) {
 		return casillas[FILAS-1][columna].estaOcupada();
@@ -129,7 +120,7 @@ public class Tablero {
 	}
 
 
-	
+
 	private boolean comprobarDiagonalINE(int fila, int columna, Ficha ficha) {
 		int desplazInicial=menor(fila,columna);
 		int filaInicial=fila-desplazInicial;
@@ -140,7 +131,7 @@ public class Tablero {
 		for(int i=filaInicial,j=columnaInicial;!objetivoAlcanzado(fichasIgualesConsecutivas)&& (i<FILAS && j<COLUMNAS); i++, j++) {
 			if (casillas[i][j].estaOcupada()&&casillas[i][j].getFicha().equals(ficha)) {
 				fichasIgualesConsecutivas++;
-			
+
 			}else {
 				fichasIgualesConsecutivas=0;
 			}
@@ -148,9 +139,9 @@ public class Tablero {
 
 		return objetivoAlcanzado(fichasIgualesConsecutivas);
 	}
-	
 
-	
+
+
 	private boolean comprobarDiagonalNO(int fila, int columna, Ficha ficha) {
 		int desplazInicial=menor(fila,COLUMNAS-1-columna);
 		int filaInicial=fila-desplazInicial;
@@ -161,7 +152,7 @@ public class Tablero {
 		for(int i=filaInicial,j=columnaInicial;!objetivoAlcanzado(fichasIgualesConsecutivas)&& (i<FILAS && j>=0); i++, j--) {
 			if (casillas[i][j].estaOcupada()&&casillas[i][j].getFicha().equals(ficha)) {
 				fichasIgualesConsecutivas++;
-			
+
 			}else {
 				fichasIgualesConsecutivas=0;
 			}
@@ -172,7 +163,7 @@ public class Tablero {
 
 	private boolean comprobarTirada(int fila, int columna, Ficha ficha) {
 		return comprobarHorizontal(fila,ficha) || comprobarVertical(columna,ficha) || comprobarDiagonalINE(fila,columna,ficha) || comprobarDiagonalNO(fila,columna,ficha);
-		
+
 	}
 
 
@@ -181,19 +172,13 @@ public class Tablero {
 		comprobarColumna(columna);
 		boolean tirada=false;
 		int filaLibre=0;
-		
-		//si la columna no está llena, al menos hay una posición libre
+
 		if(!columnaLlena(columna)) {
-			
-			//buscar la primera fila que esté libre
 			filaLibre=getPrimeraFilaVacia(columna);
 			Casilla casilla = casillas[filaLibre][columna];
-			
-			//si la casilla está libre
 			if (!casilla.estaOcupada()) {
 				casilla.setFicha(ficha);
 				casillas[filaLibre][columna]=casilla;
-				//System.out.println(toString());
 				tirada=comprobarTirada(filaLibre,columna,ficha);
 			}
 
@@ -204,7 +189,7 @@ public class Tablero {
 	}
 
 	@Override
-	
+
 	public String toString() {
 		final String saltoLineaVertical = "\n";
 		final String separacionHorizontal = " ";
@@ -244,11 +229,6 @@ public class Tablero {
 
 		return sb.toString();
 	}
-
-
-
-
-
 
 
 }
